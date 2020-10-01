@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class DeliveryDetails {
@@ -10,13 +11,17 @@ public class DeliveryDetails {
     private String quantity;
     private int price;
     private String destination;
+    private Timestamp dispatch_time;
+    private Timestamp delivery_time;
 
     //DeliveryDetails Object constructor
-    public DeliveryDetails(String item, String quantity, int price, String destination){
+    public DeliveryDetails(String item, String quantity, int price, String destination, Timestamp dispatch_time, Timestamp delivery_time){
         this.item =item;
         this.quantity = quantity;
         this.price = price;
         this.destination = destination;
+        this.dispatch_time = dispatch_time;
+        this.delivery_time = delivery_time;
 
 
     }
@@ -35,6 +40,22 @@ public class DeliveryDetails {
 
     public void setItem(String item) {
         this.item = item;
+    }
+
+    public void setDispatch_time(Timestamp dispatch_time) {
+        this.dispatch_time = dispatch_time;
+    }
+
+    public Timestamp getDispatch_time() {
+        return dispatch_time;
+    }
+
+    public void setDelivery_time(Timestamp delivery_time) {
+        this.delivery_time = delivery_time;
+    }
+
+    public Timestamp getDelivery_time() {
+        return delivery_time;
     }
 
     public int getId() {
@@ -78,11 +99,13 @@ public class DeliveryDetails {
                 price == that.price &&
                 item.equals(that.item) &&
                 quantity.equals(that.quantity) &&
-                destination.equals(that.destination);
+                destination.equals(that.destination) &&
+                dispatch_time.equals(that.dispatch_time) &&
+                delivery_time.equals(that.delivery_time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, item, quantity, price, destination);
+        return Objects.hash(id, item, quantity, price, destination, dispatch_time, delivery_time);
     }
 }

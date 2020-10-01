@@ -5,6 +5,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Sql2oDeliveryDetailsDao implements DeliveryDetailsDao {
@@ -16,7 +17,7 @@ public class Sql2oDeliveryDetailsDao implements DeliveryDetailsDao {
 
     @Override
     public void add(DeliveryDetails deliveries){
-        String sql = "INSERT INTO deliveries (item, quantity, price, destination) VALUES (:item,:quantity, :price, :destination)";
+        String sql = "INSERT INTO deliveries (item, quantity, price, destination, dispatch_time, delivery_time) VALUES (:item,:quantity, :price, :destination, :dispatch_time, :delivery_time)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(deliveries)
@@ -46,8 +47,8 @@ public class Sql2oDeliveryDetailsDao implements DeliveryDetailsDao {
     }
 
     @Override
-    public void update(int id, String item, String quantity, int price, String destination){
-        String sql = "UPDATE deliveries SET (item, quantity, price, destination) = (:item, :quantity, :price, :destination) WHERE id=:id"; //CHECK!!!
+    public void update(int id, String item, String quantity, int price, String destination, Timestamp dispatch_time, Timestamp delivery_time){
+        String sql = "UPDATE deliveries SET (item, quantity, price, destination, dispatch_time, delivery_time) = (:item, :quantity, :price, :destination, :dispatch_time, :delivery_time) WHERE id=:id"; //CHECK!!!
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("item", item)
@@ -55,6 +56,8 @@ public class Sql2oDeliveryDetailsDao implements DeliveryDetailsDao {
                     .addParameter("price", price)
                     .addParameter("id", id)
                     .addParameter("destination", destination)
+                    .addParameter("dispatch_time", dispatch_time)
+                    .addParameter("delivery_time", delivery_time)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

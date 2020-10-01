@@ -36,7 +36,7 @@ public class App {
         //for postgresql
 //        String connectionString = "jdbc:postgresql://localhost:5432/sendit";
 //        Sql2o sql2o = new Sql2o(connectionString, "moringa", "moringa");
-        //for herokupostgresql
+//        //for herokupostgresql
         String connectionString = "jdbc:postgresql://ec2-52-200-82-50.compute-1.amazonaws.com:5432/d9it5p18p3l75c";
         Sql2o sql2o = new Sql2o(connectionString, "ymhlkvtkgqzews", "4249e594aab952f2f9b10431efba02b79e814f8e91ff6b02ace16fe7616f23ad");
 

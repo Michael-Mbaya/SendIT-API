@@ -12,7 +12,9 @@ CREATE TABLE IF NOT EXISTS deliveries (
     item VARCHAR,
     quantity VARCHAR,
     price INTEGER,
-    destination VARCHAR
+    destination VARCHAR,
+    dispatch_time TIMESTAMP,
+    delivery_time TIMESTAMP
 );
 
 --CREATE DATABASE sendit;
